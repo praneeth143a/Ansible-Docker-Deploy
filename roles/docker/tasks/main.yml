@@ -1,0 +1,24 @@
+---
+
+   - name: update apt
+     apt:
+       update_cache: yes
+
+   - name: install docker
+     apt:
+       name: docker.io
+       state: present
+
+   - name: start service
+     service:
+       name: docker
+       state: started
+       enabled: yes
+
+   - name: pull image and run
+     docker_container:
+       name: my_container
+       image: praneethkumar27/greetpage
+       state: started
+       restart_policy: always
+
